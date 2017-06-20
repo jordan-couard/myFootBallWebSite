@@ -1,0 +1,37 @@
+h3{
+  text-align: center;
+  text-decoration: underline blue;
+}
+.container{
+  background-color: #8e0000;
+}
+.row{
+  min-height: 65px;
+  margin: 1rem;
+}
+.col-md-6.name {
+  border: 1px solid;
+  font-weight: bold;
+  background-color: white;
+
+}
+.col-md-3 {
+  border: 1px solid;
+  background-color: white;
+}
+.col-md-6 {
+  border: 1px solid;
+  font-style: oblique;
+  background-color: white;
+}
+
+p {
+  text-align: center;
+  padding: 0.5rem;
+  font-family: serif;
+  font-size: 2rem;
+}
+.imgCarousel {
+  max-height: 200px;
+  max-width: 50%;
+}
