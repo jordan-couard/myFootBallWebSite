@@ -7347,7 +7347,7 @@ h3{
   text-decoration: underline blue;
 }
 .container{
-  background-color: lightblue;
+  background-color: #8e0000;
 }
 .row{
   min-height: 65px;
@@ -7374,6 +7374,10 @@ p {
   padding: 0.5rem;
   font-family: serif;
   font-size: 2rem;
+}
+.imgCarousel {
+  max-height: 200px;
+  max-width: 50%;
 }
 
 

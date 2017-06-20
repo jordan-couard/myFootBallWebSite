@@ -57834,30 +57834,30 @@ angular.module('app')
         console.log(titre, res);
         $scope.equipe = '';
         $scope.dates = '';
-        ChampionnatService.getAll().then(function(res) {
-          $scope.titres = res.data;
-        });
       }, function(err) {
         console.log('echec');
       });
-    };
-    $scope.addtitreL2 = function() {
-      $scope.ligues2 = [];
-      let ligue2 = {
-        equipe: $scope.ligue2Equipe,
-        dates: $scope.ligue2Dates
-      };
-      ChampionnatService.create(ligue2).then(function(res) {
-        console.log(ligue2, res);
-        $scope.ligue2Equipe = '';
-        $scope.ligue2Dates = '';
-        ChampionnatService.getAll().then(function(res) {
-          $scope.ligues2 = res.data;
-        });
-      }, function(err) {
-        console.log('echec');
+      ChampionnatService.getAll().then(function(res) {
+        $scope.titres = res.data;
       });
     };
+      // $scope.addtitreL2 = function() {
+      //   $scope.ligues2 = [];
+      //   let ligue2 = {
+      //     equipe: $scope.ligue2Equipe,
+      //     dates: $scope.ligue2Dates
+      //   };
+      //   ChampionnatService.create(ligue2).then(function(res) {
+      //     console.log(ligue2, res);
+      //     $scope.ligue2Equipe = '';
+      //     $scope.ligue2Dates = '';
+      //     ChampionnatService.getAll().then(function(res) {
+      //       $scope.ligues2 = res.data;
+      //     });
+      //   }, function(err) {
+      //     console.log('echec');
+      //   });
+      // };
   });
 
 angular.module('app')
@@ -57884,9 +57884,15 @@ angular.module('app')
     });
 
 angular.module('app')
-    .controller('MainController', function($scope) {
-      /* Here is your main controller */
+  .controller('MainController', function($scope) {
+    /* Here is your main controller */
+    $('.slider1').bxSlider({
+      slideWidth: 200,
+      minSlides: 2,
+      maxSlides: 3,
+      slideMargin: 10
     });
+  });
 
 angular.module('app')
     .controller('NavbarController', function($scope, Auth, CurrentUser) {
@@ -57929,7 +57935,7 @@ angular.module('app')
                 }
             })
             .state('anon.home', {
-                url: '/',
+                url: '/home',
                 views: {
                     'content@': {
                         templateUrl: 'anon/home.html',
@@ -57937,8 +57943,8 @@ angular.module('app')
                     }
                 }
             })
-            .state('anon.championnat', {
-                url: '/championnat',
+            .state('anon.champ', {
+                url: '/',
                 views: {
                     'content@': {
                         templateUrl: 'anon/championnat.html',
@@ -58009,9 +58015,6 @@ angular.module("app").run(["$templateCache", function($templateCache) {
     "    <div class=\"col-md-6 name\">\n" +
     "    <p>{{ titre.equipe }}</p>\n" +
     "    </div>\n" +
-    "    <!-- <div class=\"col-md-3\">\n" +
-    "    <p>{{ nombre }}ici le nombre de succés</p>\n" +
-    "    </div> -->\n" +
     "    <div class=\"col-md-6\">\n" +
     "    <p>{{ titre.dates }}</p>\n" +
     "    </div>\n" +
@@ -58030,15 +58033,12 @@ angular.module("app").run(["$templateCache", function($templateCache) {
     "  </form>\n" +
     "</div>\n" +
     "\n" +
-    "<h3>Ligue 2 En Cours</h3><br>\n" +
+    "<!-- <h3>Ligue 2 En Cours</h3><br>\n" +
     "<div class=\"container\">\n" +
     "  <div class=\"row\" ng-repeat=\"ligue2 in ligues2\"><br>\n" +
     "    <div class=\"col-md-6 name\">\n" +
     "    <p>{{ ligue2.equipe }}</p>\n" +
     "    </div>\n" +
-    "    <!-- <div class=\"col-md-3\">\n" +
-    "    <p>{{ nombre }}ici le nombre de succés</p>\n" +
-    "    </div> -->\n" +
     "    <div class=\"col-md-6\">\n" +
     "    <p>{{ ligue2.dates }}</p>\n" +
     "    </div>\n" +
@@ -58055,19 +58055,58 @@ angular.module("app").run(["$templateCache", function($templateCache) {
     "  </div>\n" +
     "    <button type=\"button\" name=\"button\" ng-click=\"addtitreL2()\">Ajouter des titres</button>\n" +
     "  </form>\n" +
-    "</div>\n" +
-    "<!-- <h2>Angleterre</h2>\n" +
+    "</div>  <br>\n" +
+    "<h2>Angleterre</h2><br>\n" +
     "<h3>Premier League</h3><br>\n" +
     "<h2>Espagne</h2>\n" +
     "<h3>Liga</h3><br>\n" +
     "<h2>Allemagne</h2>\n" +
-    "<h3>bundesliga</h3> -->\n"
+    "<h3>Bundesliga</h3> -->\n"
   );
 
   $templateCache.put("anon/home.html",
     "<h1>Site De Foot</h1>\n" +
     "\n" +
-    "<h2><a ui-sref=\"anon.championnat\">Liste des championnats</a></h2>\n"
+    "<button type=\"button\" name=\"button\">\n" +
+    "    <a ui-sref=\"anon.champ\">Liste des championnats</a>\n" +
+    "</button>\n" +
+    "\n" +
+    "<div ui-sref-active=\"active\">\n" +
+    "<a ui-sref=\"champ\">go to champs</a>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!-- <div class=\"container-fluid imgCarousel\">\n" +
+    "  <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\n" +
+    "    <ol class=\"carousel-indicators\">\n" +
+    "      <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\n" +
+    "      <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\n" +
+    "      <li data-target=\"#myCarousel\" data-slide-to=\"2\"></li>\n" +
+    "    </ol>\n" +
+    "\n" +
+    "    <div class=\"carousel-inner\">\n" +
+    "      <div class=\"item active\">\n" +
+    "        <img src=\"http://img.clubic.com/07019580-photo-12-juin-coup-d-envoi-de-la-coupe-du-monde-de-football-a-rio.jpg\" alt=\"Los Angeles\" style=\"width:100%;\">\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"item\">\n" +
+    "        <img src=\"http://referentiel.nouvelobs.com/file/15368530-la-federation-francaise-de-foot-fait-enfin-sa-revolution-numerique.jpg\" alt=\"Chicago\" style=\"width:100%;\">\n" +
+    "      </div>\n" +
+    "\n" +
+    "      <div class=\"item\">\n" +
+    "        <img src=\"http://www.ouest-france.fr/sites/default/files/styles/image-640x360/public/2016/06/16/pourquoi-le-foot-se-joue-onze.jpg?itok=CYpQCnT-\" alt=\"Third slide\" alt=\"New york\" style=\"width:100%;\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <a class=\"left carousel-control\" href=\"#myCarousel\" data-slide=\"prev\">\n" +
+    "      <span class=\"glyphicon glyphicon-chevron-left\"></span>\n" +
+    "      <span class=\"sr-only\">Previous</span>\n" +
+    "    </a>\n" +
+    "    <a class=\"right carousel-control\" href=\"#myCarousel\" data-slide=\"next\">\n" +
+    "      <span class=\"glyphicon glyphicon-chevron-right\"></span>\n" +
+    "      <span class=\"sr-only\">Next</span>\n" +
+    "    </a>\n" +
+    "  </div>\n" +
+    "</div> -->\n"
   );
 
   $templateCache.put("anon/login.html",

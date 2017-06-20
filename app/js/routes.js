@@ -14,7 +14,7 @@ angular.module('app')
                 }
             })
             .state('anon.home', {
-                url: '/',
+                url: '/home',
                 views: {
                     'content@': {
                         templateUrl: 'anon/home.html',
@@ -22,8 +22,8 @@ angular.module('app')
                     }
                 }
             })
-            .state('anon.championnat', {
-                url: '/championnat',
+            .state('anon.champ', {
+                url: '/',
                 views: {
                     'content@': {
                         templateUrl: 'anon/championnat.html',
